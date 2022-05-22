@@ -8,8 +8,6 @@ import {auth} from '../../firebase.init';
 
 const NavigationBar = () => {
    const [user] = useAuthState(auth);
-
-   console.log(user);
    return (
       <Navbar bg="light" expand="lg">
          <Container>
