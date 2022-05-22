@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({ product }) => {
    return (
       <Card style={{ width: '18rem' }}>
          <Card.Img variant="top" src={product.image} />
@@ -17,7 +18,7 @@ const ProductCard = ({product}) => {
             <ListGroupItem>Minimum Order Quantity : {product.min_order_quantity}</ListGroupItem>
          </ListGroup>
          <Card.Body>
-            <Card.Link href="#">Purchase</Card.Link>
+            <Card.Link as={NavLink} to={`/purchase/${product._id}`}>Purchase</Card.Link>
          </Card.Body>
       </Card>
    );

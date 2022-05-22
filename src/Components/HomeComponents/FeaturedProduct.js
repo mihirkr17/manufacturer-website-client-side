@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 
 const FeaturedProduct = () => {
 
-   const { data: products, isLoading } = useQuery('products', () => fetch('https://manufacture-web.herokuapp.com/products').then(res => res.json()))
+   const { data: products, isLoading } = useQuery('products', () => fetch('http://localhost:5000/products').then(res => res.json()))
 
    if (isLoading) {
       return <Spinner></Spinner>;

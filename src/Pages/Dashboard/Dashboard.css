@@ -1,0 +1,43 @@
+.dashboard {
+   min-height: 90vh;
+   position: relative;
+   overflow: hidden;
+}
+.dashboard_sidebar {
+   background-color: var(--color-accent);
+   position: absolute;
+   top: 0;
+   left: 0;
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 90vh;
+   transition: all 0.4s linear;
+   border-right: 2px solid var(--color-primary);
+}
+
+.dashboard_sidebar .menu li {
+   list-style: none;
+   margin: 0.9rem 0;
+   width: 100%;
+}
+
+.dashboard_sidebar .menu li a {
+   color: var(--color-light);
+   text-decoration: none;
+   transition: all 0.4s linear;
+}
+
+.dashboard_sidebar .menu li a:hover {
+   color: var(--color-primary);
+}
+
+.dashboard_content {
+   padding-left: 300px;
+   transition: all 0.4s linear;
+}
+
+.dashboard_content button {
+   font-size: 0.8rem;
+}
