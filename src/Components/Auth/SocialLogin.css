@@ -1,0 +1,36 @@
+.social_auth {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   width: 100%;
+}
+
+.social_auth .divider {
+   padding: 1rem 0;
+   position: relative;
+   text-align: center;
+   width: 100%;
+}
+
+.social_auth .divider::before,
+.social_auth .divider::after {
+   content: "";
+   position: absolute;
+   width: 25%;
+   height: 3px;
+   background-color: gray;
+}
+
+.social_auth .divider::before {
+   top: 50%;
+   left: 0;
+   transform: translate(50%, -50%);
+}
+
+.social_auth .divider::after {
+   top: 50%;
+   right: 0;
+   transform: translate(-50%, -50%);
+}
+

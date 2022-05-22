@@ -1,0 +1,37 @@
+:root {
+   /* Font Style */
+   --font-primary: "Poppins", sans-serif;
+
+   /* Color Combination */
+   --color-primary: #e84a5f;
+   --color-body: #2a363b;
+   --color-light: #fafafa;
+   --color-dark: #080808;
+   --color-accent: #99b898;
+   --color-accent-alt: #86a385;
+}
+
+
+body {
+   font-family: var(--font-primary);
+}
+
+
+/* Reuseable Class  */
+.section_default {
+   padding: 4rem 0;
+}
+
+.section_title {
+   text-align: center;
+   padding: 2rem 0;
+   font-weight: bold;
+}
+
+.card_default {
+   padding: 2rem 1rem;
+   background: rgba(255, 255, 255, 0.15);
+   border-radius: 16px;
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,28 @@
+.footer__section {
+   background: url('https://i.ibb.co/x63VsNp/footer-bg.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   padding: 1rem 0;
+   color: var(--color-light);
+}
+
+.footer__section ul li {
+   list-style: none;
+}
+
+.footer_bottom {
+   border-top: 2px solid var(--color-light);
+}
+
+.footer_bottom a {
+   padding: 5px 10px;
+   background-color: var(--color-accent);
+   margin: 0 0 0 0.4rem;
+   color: var(--color-light);
+   border-radius: 3px;
+   transition: all 0.4s linear;
+}
+
+.footer_bottom a:hover {
+   background-color: var(--color-accent-alt);
+}

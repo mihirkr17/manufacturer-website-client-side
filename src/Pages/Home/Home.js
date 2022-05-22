@@ -1,10 +1,13 @@
 import React from 'react';
+import Banner from '../../Components/HomeComponents/Banner';
+import FeaturedProduct from '../../Components/HomeComponents/FeaturedProduct';
 
 const Home = () => {
    return (
-      <div>
-         
-      </div>
+      <section className='home__section'>
+         <Banner></Banner>
+         <FeaturedProduct></FeaturedProduct>
+      </section>
    );
 };
 
