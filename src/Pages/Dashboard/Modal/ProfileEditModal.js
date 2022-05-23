@@ -26,7 +26,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
 
       let address = { village, city, country, zip }
 
-      const response = await fetch(`http://localhost:5000/user/${user?.email}`, {
+      const response = await fetch(`https://manufacture-web.herokuapp.com/user/${user?.email}`, {
          method: "PUT",
          headers: {
             'content-type': 'application/json'

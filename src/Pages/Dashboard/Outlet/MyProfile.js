@@ -17,7 +17,7 @@ const MyProfile = () => {
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
 
-   const { data: profile, isLoading, refetch } = useQuery('profile', () => fetch(`http://localhost:5000/user-info/${user?.email}`).then(res => res.json()));
+   const { data: profile, isLoading, refetch } = useQuery('profile', () => fetch(`https://manufacture-web.herokuapp.com/user-info/${user?.email}`).then(res => res.json()));
 
    isLoading && <Spinner></Spinner>;
 
