@@ -1,8 +1,8 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { auth } from '../../firebase.init';
 
 
@@ -24,7 +24,7 @@ const NavigationBar = () => {
                      <Nav.Link as={NavLink} to="/dashboard">Dashboard</Nav.Link>
                      <button className="btn btn-danger" onClick={() => signOut(auth)} >
                         Sign Out
-                     </button></> : <Nav.Link to="/login">Login</Nav.Link>
+                     </button></> : <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
                   }
                </Nav>
             </Navbar.Collapse>

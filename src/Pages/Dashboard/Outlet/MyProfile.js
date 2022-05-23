@@ -5,6 +5,7 @@ import { Button, Nav } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import UserSkeleton from '../../../Components/DashboardComponents/UserSkeleton';
 import Spinner from '../../../Components/Shared/Spinner/Spinner';
 import { auth } from '../../../firebase.init';
 import ProfileEditModal from '../Modal/ProfileEditModal';
@@ -59,65 +60,11 @@ const MyProfile = () => {
                   <div className="profile-work">
                      <p>WORK LINK</p>
                      <Nav.Link as={Link} to="/">Home</Nav.Link>
-                     <Nav.Link href={profile?.linkedin} rel="noreferrer" target='_blank'>Linkedin</Nav.Link>
+                     {profile?.linkedin && <Nav.Link href={profile?.linkedin} rel="noreferrer" target='_blank'>Linkedin</Nav.Link>}
                   </div>
                </div>
                <div className="col-md-8">
-                  <div className="profile-tab">
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>User Id</label>
-                        </div>
-                        <div className="col-md-7">
-                           <p>{profile?._id}</p>
-                        </div>
-                     </div>
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>Name</label>
-                        </div>
-                        <div className="col-md-7">
-                           <p>{user?.displayName}</p>
-                        </div>
-                     </div>
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>Email</label>
-                        </div>
-                        <div className="col-md-7">
-                           <p>{profile?.email}</p>
-                        </div>
-                     </div>
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>Phone</label>
-                        </div>
-                        <div className="col-md-7">
-                           <p>{profile?.phone}</p>
-                        </div>
-                     </div>
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>Profession</label>
-                        </div>
-                        <div className="col-md-7">
-                           <p>{profile?.profession}</p>
-                        </div>
-                     </div>
-                     <div className="row py-1">
-                        <div className="col-md-4">
-                           <label>Address</label>
-                        </div>
-                        <div className="col-md-7">
-                           <address>
-                              <p>Village : {profile?.address?.village}</p>
-                              <p>City : {profile?.address?.city}</p>
-                              <p>Country : {profile?.address?.country}</p>
-                              <p>Zip Code : {profile?.address?.zip}</p>
-                           </address>
-                        </div>
-                     </div>
-                  </div>
+                  <UserSkeleton profile={profile}></UserSkeleton>
                </div>
             </div>
          </div>
