@@ -20,6 +20,7 @@ import RequiredAdmin from './Components/Auth/RequiredAdmin';
 import ManageOrders from './Pages/Dashboard/Outlet/ManageOrders';
 import AddProduct from './Pages/Dashboard/Outlet/AddProduct';
 import ManageProduct from './Pages/Dashboard/Outlet/ManageProduct';
+import ManageUsers from './Pages/Dashboard/Outlet/ManageUsers';
 
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ function App() {
           <Route path="review" element={<AddReview></AddReview>}></Route>
           <Route path="my-order" element={<MyOrders></MyOrders>}></Route>
 
+          <Route path='manage-users' element={<RequiredAdmin><ManageUsers></ManageUsers></RequiredAdmin>}></Route>
           <Route path='manage-orders' element={<RequiredAdmin><ManageOrders></ManageOrders></RequiredAdmin>}></Route>
           <Route path='add-product' element={<RequiredAdmin><AddProduct></AddProduct></RequiredAdmin>}></Route>
           <Route path='manage-product' element={<RequiredAdmin><ManageProduct></ManageProduct></RequiredAdmin>}></Route>
