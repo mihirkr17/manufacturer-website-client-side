@@ -22,6 +22,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
       let country = e.target.country.value;
       let profession = e.target.profession.value;
       let linkedin = e.target.linkedin.value;
+      let username = user?.displayName;
 
       let address = { village, city, country, zip }
 
@@ -30,7 +31,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
          headers: {
             'content-type': 'application/json'
          },
-         body: JSON.stringify({ address, phone, profession, linkedin })
+         body: JSON.stringify({ username, address, phone, profession, linkedin })
       })
 
       if (response.ok) {
