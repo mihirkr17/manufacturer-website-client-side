@@ -11,7 +11,7 @@ const ManageUsers = () => {
    const [userDetailModal, setUserDetailModal] = useState(false);
    const { msg, setMessage } = useMessage();
 
-   const { data: users, isLoading, refetch } = useQuery('users', () => fetch(`https://manufacture-web.herokuapp.com/users`).then(res => res.json()));
+   const { data: users, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/users`).then(res => res.json()));
 
    if (isLoading) {
       return <Spinner></Spinner>;
@@ -19,7 +19,7 @@ const ManageUsers = () => {
 
    // make admin handler
    const makeAdminHandler = async (userEmail) => {
-      const response = await fetch(`https://manufacture-web.herokuapp.com/user/admin/${userEmail}`, {
+      const response = await fetch(`http://localhost:5000/user/admin/${userEmail}`, {
          method: "PUT",
          headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

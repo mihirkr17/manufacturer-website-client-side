@@ -45,6 +45,12 @@
    font-size: 0.8rem;
 }
 
+.sidebar_btn {
+   position: absolute;
+   right: 0;
+   top: 2%;
+}
+
 /* My Profile Css */
 .profile-img {
    text-align: center;
@@ -95,7 +101,7 @@
    font-weight: 600;
 }
 .profile-head .nav-tabs {
-   margin-bottom: 5%;
+   margin-bottom: 2%;
 }
 .profile-head .nav-tabs .nav-link {
    font-weight: 600;

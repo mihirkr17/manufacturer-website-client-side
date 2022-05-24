@@ -1,7 +1,7 @@
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Button, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -14,13 +14,9 @@ const MyProfile = () => {
    const [user] = useAuthState(auth);
    const [show, setShow] = useState(false);
 
-   const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
-
-   const { data: profile, isLoading, refetch } = useQuery('profile', () => fetch(`https://manufacture-web.herokuapp.com/user-info/${user?.email}`).then(res => res.json()));
+   const { data: profile, isLoading, refetch } = useQuery('profile', () => fetch(`http://localhost:5000/user-info/${user?.email}`).then(res => res.json()));
 
    isLoading && <Spinner></Spinner>;
-
 
    return (
       <div className='my_profile'>
@@ -35,7 +31,7 @@ const MyProfile = () => {
                      </div>
                   </form>
                </div>
-               <div className="col-md-6">
+               <div className="col-md-8">
                   <div className="profile-head pt-4">
                      <h5>
                         {user?.displayName}
@@ -46,13 +42,13 @@ const MyProfile = () => {
                            <span className="nav-link active">About</span>
                         </li>
                      </ul>
+                     <div className="pb-2">
+                        <button className='btn btn-primary btn-sm' onClick={() => setShow(true)}>
+                           Edit Profile
+                           <FontAwesomeIcon className='ms-2' icon={faPenSquare}></FontAwesomeIcon>
+                        </button>
+                     </div>
                   </div>
-               </div>
-               <div className="col-md-2 pt-4">
-                  <Button variant="primary" onClick={handleShow}>
-                     Edit Profile
-                     <FontAwesomeIcon className='ms-2' icon={faPenSquare}></FontAwesomeIcon>
-                  </Button>
                </div>
             </div>
             <div className="row">
@@ -64,6 +60,7 @@ const MyProfile = () => {
                   </div>
                </div>
                <div className="col-md-8">
+
                   <UserSkeleton profile={profile}></UserSkeleton>
                </div>
             </div>
@@ -71,7 +68,7 @@ const MyProfile = () => {
 
          <ProfileEditModal
             show={show}
-            handleClose={handleClose}
+            handleClose={() => setShow(false)}
             user={user}
             refetch={refetch}
             profile={profile}

@@ -13,7 +13,7 @@ const AddReview = () => {
    const [ratingText, setRatingText] = useState('');
 
    // fetching all my reviews
-   const { data: reviews, isLoading, refetch } = useQuery('reviews', () => fetch(`https://manufacture-web.herokuapp.com/review/${user?.email}`).then(res => res.json()));
+   const { data: reviews, isLoading, refetch } = useQuery('reviews', () => fetch(`http://localhost:5000/review/${user?.email}`).then(res => res.json()));
 
    // Add review handler action
    const handleRating = async (e) => {
@@ -22,7 +22,7 @@ const AddReview = () => {
       let email = user?.email;
 
 
-      const response = await fetch('https://manufacture-web.herokuapp.com/reviews', {
+      const response = await fetch('http://localhost:5000/reviews', {
          method: "POST",
          headers: {
             "Content-type": "application/json"
@@ -42,7 +42,7 @@ const AddReview = () => {
 
    // Delete review
    const deleteReview = async (reviewId) => {
-      const response = await fetch(`https://manufacture-web.herokuapp.com/review/${reviewId}`, {
+      const response = await fetch(`http://localhost:5000/review/${reviewId}`, {
          method: "DELETE"
       });
 

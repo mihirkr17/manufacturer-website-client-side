@@ -4,7 +4,7 @@ import './ConfirmModal.css';
 
 const ConfirmModal = ({ okConfirm, cancelConfirm, confirmShow, message }) => {
    return (
-      <Modal show={confirmShow} onHide={cancelConfirm} className='confirmModal'>
+      <Modal show={confirmShow} className='confirmModal'>
          <Modal.Body>
             <div className="row">
                <div className="col-12 text-center">

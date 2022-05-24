@@ -5,7 +5,7 @@ import FileBase64 from 'react-file-base64';
 import { useForm } from "react-hook-form";
 
 const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
-   const { register, formState: { errors }, handleSubmit, reset } = useForm();
+   const { register, formState: { errors }, handleSubmit } = useForm();
    const [msg, setMsg] = useState('');
    const [alertShow, setAlertShow] = useState(false);
 
@@ -26,7 +26,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
 
       let address = { village, city, country, zip }
 
-      const response = await fetch(`https://manufacture-web.herokuapp.com/user/${user?.email}`, {
+      const response = await fetch(`http://localhost:5000/user/${user?.email}`, {
          method: "PUT",
          headers: {
             'content-type': 'application/json'
@@ -73,10 +73,8 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
          </AlertModal>
 
          <Modal show={show}
-            dialogClassName="modal-90w"
-            onHide={handleClose}
          >
-            <Modal.Header closeButton>
+            <Modal.Header>
                <Modal.Title>Add Information :</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -164,24 +162,24 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
                                     <Form.Control name='linkedin' defaultValue={profile?.linkedin || ''} type='text' />
                                  </Form.Group>
 
-                                 <Button variant="primary" type="submit">
-                                    Submit
-                                 </Button>
+
+                                 <Modal.Footer>
+                                    <Button variant="primary" type="submit">
+                                       Submit
+                                    </Button>
+                                    <Button variant="danger" onClick={handleClose}>
+                                       Close
+                                    </Button>
+                                 </Modal.Footer>
                               </Form>
                               <hr />
                            </div>
-
                         </div>
                      </div>
-
                   </div>
                </div>
             </Modal.Body>
-            <Modal.Footer>
-               <Button variant="secondary" onClick={handleClose}>
-                  Close
-               </Button>
-            </Modal.Footer>
+
          </Modal>
       </>
    );
