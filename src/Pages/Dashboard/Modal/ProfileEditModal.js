@@ -121,7 +121,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
                                  <Row className="mb-3">
                                     <Form.Group as={Col} controlId="formGridEmail">
                                        <Form.Label>Email</Form.Label>
-                                       <Form.Control type="email" disabled value={profile?.email} placeholder="Enter email" />
+                                       <Form.Control type="email" disabled defaultValue={profile?.email} placeholder="Enter email" />
                                     </Form.Group>
 
                                     <Form.Group as={Col} controlId="formGridPassword">

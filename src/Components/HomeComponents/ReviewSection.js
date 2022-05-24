@@ -3,7 +3,11 @@ import { useQuery } from 'react-query';
 import ReviewSectionCard from './ReviewSectionCard';
 
 const ReviewSection = () => {
-   const { data: reviews, isLoading, refetch } = useQuery('reviews', () => fetch(`http://localhost:5000/reviews`).then(res => res.json()));
+   const { data: reviews, isLoading } = useQuery('reviews', () => fetch(`http://localhost:5000/reviews`).then(res => res.json()));
+
+   if (isLoading) {
+      return
+   }
 
    return (
       <div className='section_default'>
