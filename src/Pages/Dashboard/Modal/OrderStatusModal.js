@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, Nav } from 'react-bootstrap';
-import OrderInfoTable from '../../../Components/Shared/OrderInfoTable';
+import OrderInfoTable from '../../../Components/DashboardComponents/OrderInfoTable';
 
 const OrderStatusModal = ({ order, closeModal }) => {
 

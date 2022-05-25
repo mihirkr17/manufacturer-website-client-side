@@ -14,13 +14,11 @@ const Payment = () => {
    const { data: order, isLoading, refetch } = useQuery('order', () => fetch(`http://localhost:5000/order/${id}`).then(res => res.json()));
    if (isLoading) { return <Spinner></Spinner> }
 
-   console.log(paymentInfo);
-
    return (
       <div>
          {id}
          <Elements stripe={stripePromise}>
-            <CheckoutForm order={order} setPaymentInfo={setPaymentInfo}/>
+            <CheckoutForm order={order} refetch={refetch} setPaymentInfo={setPaymentInfo}/>
          </Elements>
 
 

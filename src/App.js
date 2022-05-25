@@ -22,6 +22,9 @@ import AddProduct from './Pages/Dashboard/Outlet/AddProduct';
 import ManageProduct from './Pages/Dashboard/Outlet/ManageProduct';
 import ManageUsers from './Pages/Dashboard/Outlet/ManageUsers';
 import Payment from './Pages/Payment/Payment';
+import NotFound from './Pages/NotFound/NotFound';
+import Blog from './Pages/Blog/Blog';
+import Portfolio from './Pages/Portfolio/Portfolio';
 
 
 const queryClient = new QueryClient();
@@ -31,6 +34,8 @@ function App() {
       <NavigationBar></NavigationBar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/blog' element={<Blog></Blog>}></Route>
+        <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/purchase/:productId' element={<RequiredAuth><Purchase></Purchase></RequiredAuth>}></Route>
@@ -44,7 +49,7 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path="review" element={<AddReview></AddReview>}></Route>
           <Route path="my-order" element={<MyOrders></MyOrders>}></Route>
-          
+
           <Route path='payment/:id' element={<Payment></Payment>}></Route>
 
           <Route path='manage-users' element={<RequiredAdmin><ManageUsers></ManageUsers></RequiredAdmin>}></Route>
@@ -52,7 +57,7 @@ function App() {
           <Route path='add-product' element={<RequiredAdmin><AddProduct></AddProduct></RequiredAdmin>}></Route>
           <Route path='manage-product' element={<RequiredAdmin><ManageProduct></ManageProduct></RequiredAdmin>}></Route>
         </Route>
-
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </QueryClientProvider>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMessage } from '../../Hooks/useMessage';
 
-const CheckoutForm = ({ order, setPaymentInfo }) => {
+const CheckoutForm = ({ order, setPaymentInfo, refetch }) => {
    const { msg, setMessage } = useMessage();
    const stripe = useStripe();
    const elements = useElements();
@@ -92,6 +92,7 @@ const CheckoutForm = ({ order, setPaymentInfo }) => {
             const resData = await res.json();
             setPaymentInfo(paymentIntent && resData);
             event.target.reset();
+            refetch();
          }
       }
    };
