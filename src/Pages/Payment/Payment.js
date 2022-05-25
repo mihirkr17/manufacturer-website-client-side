@@ -14,6 +14,8 @@ const Payment = () => {
    const { data: order, isLoading, refetch } = useQuery('order', () => fetch(`http://localhost:5000/order/${id}`).then(res => res.json()));
    if (isLoading) { return <Spinner></Spinner> }
 
+   console.log(paymentInfo);
+
    return (
       <div>
          {id}
@@ -21,9 +23,11 @@ const Payment = () => {
             <CheckoutForm order={order} setPaymentInfo={setPaymentInfo}/>
          </Elements>
 
+
+
          <div className="card">
             <div className="card-body">
-               {paymentInfo?.id}
+               Your TxId: {paymentInfo?.id}
             </div>
          </div>
       </div>

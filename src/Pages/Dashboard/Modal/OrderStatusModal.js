@@ -1,17 +1,13 @@
 import React from 'react';
 import { Button, Modal, Nav } from 'react-bootstrap';
+import OrderInfoTable from '../../../Components/Shared/OrderInfoTable';
 
 const OrderStatusModal = ({ order, closeModal }) => {
-  
+
    return (
       <Modal show={order} onHide={closeModal}>
-         <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-         </Modal.Header>
          <Modal.Body>
-            {
-          
-            }
+            <OrderInfoTable order={order}></OrderInfoTable>
          </Modal.Body>
          <Modal.Footer>
             <Button variant="secondary" onClick={closeModal}>

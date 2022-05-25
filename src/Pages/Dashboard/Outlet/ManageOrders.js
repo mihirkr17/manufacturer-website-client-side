@@ -30,7 +30,7 @@ const ManageOrders = () => {
                <tbody>
                   {
                      allOrders ? allOrders.map((order) => {
-                        const { username, email, product_name, product_price, order_quantity, total_price, paid } = order;
+                        const { username, email, product_name, product_price, order_quantity, total_price, payment } = order;
                         return (
                            <tr key={order._id}>
                               <td>{++serial}</td>
@@ -39,7 +39,7 @@ const ManageOrders = () => {
                               <td>{product_price}$</td>
                               <td>{order_quantity}</td>
                               <td>{total_price}</td>
-                              <td>{paid}</td>
+                              <td>{payment}</td>
                               <td>
                                  <InputGroup className="mb-3">
                                     <DropdownButton
@@ -47,7 +47,7 @@ const ManageOrders = () => {
                                        variant="outline-secondary"
                                        id="input-group-dropdown-1"
                                     >
-                                       <Dropdown.Item onClick={() => setOrderStatusModal(true && allOrders)} >Profile</Dropdown.Item>
+                                       <Dropdown.Item onClick={() => setOrderStatusModal(true && order)} >Details</Dropdown.Item>
                                     </DropdownButton>
                                  </InputGroup>
                                  <OrderStatusModal

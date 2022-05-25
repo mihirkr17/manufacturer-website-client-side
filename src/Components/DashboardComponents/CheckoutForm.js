@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMessage } from '../../Hooks/useMessage';
 
 const CheckoutForm = ({ order, setPaymentInfo }) => {
@@ -8,12 +9,13 @@ const CheckoutForm = ({ order, setPaymentInfo }) => {
    const elements = useElements();
    const [clientSecret, setClientSecret] = useState('');
    const { total_price, email, username } = order;
+   const navigate = useNavigate();
 
    useEffect(() => {
       let controller = new AbortController();
       (async () => {
          const response = await fetch(`http://localhost:5000/create-payment-intent`, {
-          
+
             method: "POST",
             headers: {
                'content-type': 'application/json',
@@ -77,7 +79,20 @@ const CheckoutForm = ({ order, setPaymentInfo }) => {
       if (intErr) {
          setMessage(intErr?.message);
       } else {
-         setPaymentInfo(paymentIntent);
+         // if the payment success then update the order details
+         if (paymentIntent?.id) {
+            let paymentId = { TxId: paymentIntent?.id };
+            const res = await fetch(`http://localhost:5000/order-payment/${order._id}`, {
+               method: "PUT",
+               headers: {
+                  'content-type': 'application/json'
+               },
+               body: JSON.stringify(paymentId)
+            });
+            const resData = await res.json();
+            setPaymentInfo(paymentIntent && resData);
+            event.target.reset();
+         }
       }
    };
 
