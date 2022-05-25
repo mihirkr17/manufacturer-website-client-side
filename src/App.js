@@ -21,6 +21,7 @@ import ManageOrders from './Pages/Dashboard/Outlet/ManageOrders';
 import AddProduct from './Pages/Dashboard/Outlet/AddProduct';
 import ManageProduct from './Pages/Dashboard/Outlet/ManageProduct';
 import ManageUsers from './Pages/Dashboard/Outlet/ManageUsers';
+import Payment from './Pages/Payment/Payment';
 
 
 const queryClient = new QueryClient();
@@ -43,6 +44,8 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path="review" element={<AddReview></AddReview>}></Route>
           <Route path="my-order" element={<MyOrders></MyOrders>}></Route>
+          
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
 
           <Route path='manage-users' element={<RequiredAdmin><ManageUsers></ManageUsers></RequiredAdmin>}></Route>
           <Route path='manage-orders' element={<RequiredAdmin><ManageOrders></ManageOrders></RequiredAdmin>}></Route>

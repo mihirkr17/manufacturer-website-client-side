@@ -6,7 +6,6 @@ import ConfirmModal from '../Shared/CustomModal/ConfirmModal';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const OrderTable = ({ orders, refetch, setMessage }) => {
-   const [paymentModal, setPaymentModal] = useState(false);
    const [orderDeleteModal, setOrderDeleteModal] = useState(false);
 
    let serial = 0;
@@ -16,7 +15,9 @@ const OrderTable = ({ orders, refetch, setMessage }) => {
    }
 
    const deleteOrderHandler = async (order) => {
-      const response = await fetch(`http://localhost:5000/delete-my-order/${order?._id}`, {
+      let orderId = order?._id;
+
+      const response = await fetch(`http://localhost:5000/delete-my-order/${orderId}`, {
          method: "DELETE"
       });
 
@@ -35,6 +36,7 @@ const OrderTable = ({ orders, refetch, setMessage }) => {
                <th>Name</th>
                <th>Total Price</th>
                <th>Order Qty</th>
+               <th>Status</th>
                <th>Total Price</th>
                <th>Payment</th>
                <th>Action</th>
@@ -43,28 +45,21 @@ const OrderTable = ({ orders, refetch, setMessage }) => {
          <tbody>
             {
                orders ? orders.map((order) => {
-
-                  const { username, email } = order.userInformation;
-                  const { product_id, product_name, product_price, order_quantity, total_price, paid } = order.orderInformation;
+                  const { username, email, product_id, product_name, product_price, order_quantity, total_price, paid, status } = order;
                   return (
                      <tr key={order._id}>
                         <td>{++serial}</td>
                         <td>{product_name}</td>
                         <td>{product_price}</td>
                         <td>{order_quantity}</td>
+                        <td>{status}</td>
                         <td>{total_price}</td>
                         <td>
                            {
                               paid === 'paid' ?
                                  <Badge>Paid</Badge> :
                                  <>
-                                    <Badge onClick={() => setPaymentModal(true && order)} style={{ cursor: 'pointer' }}>Pay</Badge>
-                                    <ConfirmModal
-                                       okConfirm={makePaymentHandler}
-                                       cancelConfirm={() => setPaymentModal(false)}
-                                       confirmShow={paymentModal}
-                                       message={(`Want to payment for "${paymentModal}"`)}
-                                    />
+                                    <Badge as={Link} to={`/dashboard/payment/${order._id}`} style={{ cursor: 'pointer' }}>Payment</Badge>
                                  </>
                            }
                         </td>

@@ -41,21 +41,20 @@ const ProductDetail = ({ product, refetch, isLoading, user }) => {
       let product_id = _id;
       let product_price = parseInt(price);
       let product_name = name;
+      let status = "pending";
+      let payment = 'unpaid';
 
       let total_price = parseInt(price) * order_quantity;
-      let available_quantity = parseInt(quantity) - order_quantity;
 
-      let userInformation = { username, email, phone, village, district, country, zip }
-      let orderInformation = { product_id, product_name, product_price, order_quantity, available_quantity, total_price }
+      let orderInformation = { product_id, product_name, product_price, order_quantity, total_price, status, payment, username, email, phone, village, district, country, zip }
 
-      let orderList = { userInformation, orderInformation };
 
       const response = await fetch(`http://localhost:5000/orders/${product_id}`, {
          method: "POST",
          headers: {
             "content-type": "application/json"
          },
-         body: JSON.stringify(orderList)
+         body: JSON.stringify(orderInformation)
       });
 
       if (response.ok) {
@@ -91,7 +90,7 @@ const ProductDetail = ({ product, refetch, isLoading, user }) => {
                      <p><strong>Price :</strong> {price}</p>
                      <p><strong>Material : </strong> {material}</p>
                      <p><strong>Quantity : </strong> {quantity}</p>
-                     <p><strong>Availability : </strong> {availability === true ? "In stock!" : "Out Of Stock"}</p>
+                     <p><strong>Availability : </strong> {availability}</p>
                      <p><strong>Description :</strong> {description}</p>
                   </div>
                   <div className="purchase_form p-3 shadow rounded-4">
