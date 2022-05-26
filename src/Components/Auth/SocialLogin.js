@@ -32,7 +32,8 @@ const SocialLogin = () => {
          {errMsg}
          <button
             onClick={() => signInWithGoogle()} className="btn btn-primary">
-            {loading ? <><SpinnerBtn></SpinnerBtn> <span className='align-self-center'>Signing...</span></> : <span className='btn_text'>Login With Google</span>}
+            {loading ? <><SpinnerBtn></SpinnerBtn> <span className='align-self-center'>Signing...</span></> : <span className='btn_text'>
+               Login With Google</span>}
          </button>
       </div>
    );
