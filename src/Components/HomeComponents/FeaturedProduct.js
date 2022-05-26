@@ -3,9 +3,7 @@ import { useQuery } from 'react-query';
 import Spinner from '../Shared/Spinner/Spinner';
 import ProductCard from './ProductCard';
 
-const FeaturedProduct = () => {
-
-   const { data: products, isLoading } = useQuery('products', () => fetch('http://localhost:5000/products').then(res => res.json()))
+const FeaturedProduct = ({products, isLoading}) => {
 
    if (isLoading) {
       return <Spinner></Spinner>;
@@ -13,14 +11,18 @@ const FeaturedProduct = () => {
 
    return (
       <div className='section_default'>
-         <h2 className='section_title'>Featured Products</h2>
+
+         <h3 className='section_title'>
+            <p className='text-center'>Wood Working Tools</p>
+            Featured Products
+         </h3>
 
          <div className="container">
             <div className="row">
                {
                   products.map(product => {
                      return (
-                        <div className="col-lg-4 d-flex align-items-center justify-content-center" key={product._id}>
+                        <div className="col-lg-3 d-flex align-items-center justify-content-center" key={product._id}>
                            <ProductCard product={product}></ProductCard>
                         </div>
                      )

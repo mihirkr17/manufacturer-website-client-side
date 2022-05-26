@@ -19,10 +19,9 @@ const Banner = () => {
                src="https://i.ibb.co/0rHgh24/slider-1.jpg"
                alt="First slide"
             />
-            <Carousel.Caption>
+            <Carousel.Caption className='slider_caption'>
                <h5>Best Carpenter's Company</h5>
-               <h2>Professional & Quality Carpenter Service</h2>
-               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+               <h1 className='fs-1'>Professional & Quality Carpenter Service</h1>
             </Carousel.Caption>
          </Carousel.Item>
          <Carousel.Item>
@@ -32,9 +31,9 @@ const Banner = () => {
                alt="Second slide"
             />
 
-            <Carousel.Caption>
-               <h3>Second slide label</h3>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <Carousel.Caption className='slider_caption'>
+               <h5>Wood Work That Shows Our Best Standard</h5>
+               <h1 className='fs-1'>Woodworker Hand Tool</h1>
             </Carousel.Caption>
          </Carousel.Item>
          <Carousel.Item>
@@ -44,11 +43,11 @@ const Banner = () => {
                alt="Third slide"
             />
 
-            <Carousel.Caption>
-               <h3>Third slide label</h3>
-               <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-               </p>
+            <Carousel.Caption className='slider_caption'>
+               <h5>Complete Furnishing With Best Quality</h5>
+               <h1 className='fs-1'>
+                  Fine Carpenter Tool
+               </h1>
             </Carousel.Caption>
          </Carousel.Item>
       </Carousel>

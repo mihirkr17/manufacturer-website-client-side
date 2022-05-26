@@ -2,7 +2,7 @@ import React from 'react';
 
 const PersonalInfo = ({ data }) => {
    return (
-      <ul className="qualification_personal_info_ul card_default">
+      <ul className="personal_info_ul card_default">
          <li>
             <span className="p_label">Name :</span>
             <span className="p_info">{data?.name}</span>

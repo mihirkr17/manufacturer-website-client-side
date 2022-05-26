@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import AlertModal from '../../../Components/Shared/CustomModal/AlertModal';
-import FileBase64 from 'react-file-base64';
-import { useForm } from "react-hook-form";
 
 const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
-   const { register, formState: { errors }, handleSubmit } = useForm();
    const [msg, setMsg] = useState('');
    const [alertShow, setAlertShow] = useState(false);
-
-   // open and close handler for alert modal
-   const alertOpen = () => setAlertShow(true);
-   const alertClose = () => setAlertShow(false);
 
    const handleForm = async (e) => {
       e.preventDefault();
@@ -26,7 +19,7 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
 
       let address = { village, city, country, zip }
 
-      const response = await fetch(`http://localhost:5000/user/${user?.email}`, {
+      const response = await fetch(`https://manufacture-web.herokuapp.com/user/${user?.email}`, {
          method: "PUT",
          headers: {
             'content-type': 'application/json'
@@ -39,34 +32,18 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
          if (resData.result?.acknowledged === true) {
             refetch();
             handleClose();
-            alertOpen();
+            setAlertShow(true);
             setMsg("Data Inserted Successfully.");
          } else {
-            alertOpen();
+            setAlertShow(true);
             setMsg("Something went wrong!");
          }
-      }
-   }
-   const imageApiKey = '3e2f79893e30db2cde3328e30d46fca0';
-   const handleImage = async (data) => {
-      // e.preventDefault();
-      let image = data.image[0];
-      let formData = new FormData();
-      formData.append('image', image);
-      const response = await fetch(`https://api.imgbb.com/1/upload?key=${imageApiKey}`, {
-         method: "POST",
-         body: formData
-      });
-
-      if (response.ok) {
-         const res = await response.json();
-         console.log(res);
       }
    }
    return (
       <>
          <AlertModal
-            alertClose={alertClose}
+            alertClose={() => setAlertShow(false)}
             alertShow={alertShow}
             message={msg}
          >
@@ -80,40 +57,6 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
             <Modal.Body>
                <div className="container bootstrap snippet">
                   <div className="row">
-                     <div className="col-12">
-                        <form className="profile-img pt-4" onSubmit={handleSubmit(handleImage)}>
-                           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-                           <div className="file btn btn-lg btn-primary">
-                              Change Photo
-                              <input type="file" name="file" />
-                              {/* <FileBase64
-                                 type="file"
-                                 multiple={false}
-                                 onDone={changeHandler}
-                              /> */}
-                           </div>
-
-                           <div className="form-control w-full max-w-xs">
-                              <label className="label">
-                                 <span className="label-text">Photo</span>
-                              </label>
-                              <input
-                                 type="file"
-                                 className="input input-bordered w-full max-w-xs"
-                                 {...register("image", {
-                                    required: {
-                                       value: true,
-                                       message: 'Image is Required'
-                                    }
-                                 })}
-                              />
-                              <label className="label">
-                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
-                              </label>
-                           </div>
-                           <button className='btn btn-sm btn-primary' type='submit'>Change Image</button>
-                        </form>
-                     </div>
                      <div className="col-sm-12">
                         <div className="tab-content">
                            <div className="tab-pane active" id="home">
@@ -179,7 +122,6 @@ const ProfileEditModal = ({ handleClose, show, user, refetch, profile }) => {
                   </div>
                </div>
             </Modal.Body>
-
          </Modal>
       </>
    );

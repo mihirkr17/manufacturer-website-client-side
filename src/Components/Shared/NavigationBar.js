@@ -12,7 +12,7 @@ const NavigationBar = () => {
    return (
       <Navbar bg="light" sticky='top' className='shadow border-bottom py-3' expand="lg">
          <Container>
-            <Navbar.Brand as={NavLink} to="/">Carpen-Factory</Navbar.Brand>
+            <Navbar.Brand as={NavLink} to="/">Carpent-Factory</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="ms-auto">

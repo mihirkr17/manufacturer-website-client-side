@@ -45,12 +45,12 @@ const Login = () => {
    }
 
    return (
-      <div className='Login__section section_default'>
+      <div className='Login__section section_default auth'>
          <div className="container">
             <div className="row">
                <div className="col-lg-4 col-sm-12 col-md-8 mx-auto">
                   <div className="card_default">
-                  <h2 className="text-center fs-4 fw-bold py-5">Login To Carpen-Factory</h2>
+                  <h2 className="text-center fs-4 fw-bold py-5">Login To Carpent-Factory</h2>
                      <Form onSubmit={handleSubmit(onSubmit)} className='text-center'>
                         <FloatingLabel
                            controlId="floatingInput"
@@ -104,7 +104,7 @@ const Login = () => {
                         </div>
                      </Form>
                      <p className='text-center py-4'>
-                        <small>New to Carpen-Factory <Link className='text-primary' to="/register">Register</Link> Here</small>
+                        <small>New to Carpent-Factory <Link className='text-primary' to="/register">Register</Link> Here</small>
                      </p>
                      <SocialLogin></SocialLogin>
                   </div>

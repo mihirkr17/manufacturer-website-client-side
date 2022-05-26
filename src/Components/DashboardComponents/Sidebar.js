@@ -15,7 +15,7 @@ const Sidebar = ({ toggle, setToggle }) => {
    }
 
    return (
-      <aside className="dashboard_sidebar" style={toggle === false ? { width: '0px' } : { width: '300px' }}>
+      <aside className="card_default dashboard_sidebar" style={toggle === false ? { width: '0px' } : { width: '300px' }}>
          {
             toggle === true && <button className={`btn me-3 btn-outline-primary sidebar_btn`} onClick={() => setToggle(y => !y)}>
                <FontAwesomeIcon icon={faChevronLeft}></FontAwesomeIcon>

@@ -1,3 +1,5 @@
+import { faCalendarAlt, faCertificate, faUniversity } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const Education = ({ data }) => {
@@ -8,11 +10,11 @@ const Education = ({ data }) => {
             education ? education.map(eduData => {
                const { edu_id, certificate, inst, year } = eduData;
                return (
-                  <div className="mkr_info_contents_panel_data" key={edu_id}>
-                     <div className="mkr_info_contents_panel_data_text card_default">
-                        <h6><i className="fas fa-certificate"></i>{certificate}</h6>
-                        <p><i className="fas fa-university"></i>{inst}</p>
-                        <span><i className="far fa-calendar-alt"></i>{year}</span>
+                  <div className="info_card" key={edu_id}>
+                     <div className="info_card_text card_default">
+                        <h6><FontAwesomeIcon icon={faCertificate}/>&nbsp;{certificate}</h6>
+                        <p><FontAwesomeIcon icon={faUniversity}/>&nbsp;{inst}</p>
+                        <span><FontAwesomeIcon icon={faCalendarAlt}/>&nbsp;{year}</span>
                      </div>
                   </div>
                )

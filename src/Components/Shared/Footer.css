@@ -1,9 +1,36 @@
 .footer__section {
-   background: url('https://i.ibb.co/x63VsNp/footer-bg.jpg');
+   background: url("https://i.ibb.co/x63VsNp/footer-bg.jpg");
    background-size: cover;
    background-repeat: no-repeat;
-   padding: 1rem 0;
+   padding: 2rem 0;
    color: var(--color-light);
+   position: relative;
+   margin-top: 5rem;
+}
+
+.footer_top {
+   position: absolute;
+   top: 0px;
+   left: 50%;
+   transform: translate(-50%, -50px);
+   background-color: var(--color-chocolate);
+   border-radius: 10px;
+   padding: 1.5rem 0;
+}
+
+.footer__section small {
+   margin: 0 0 0.5rem 0;
+   cursor: pointer;
+}
+
+.footer__section a {
+   text-decoration: none;
+   color: var(--color-light);
+}
+
+.footer__section a:hover {
+   text-decoration: underline;
+   color: var(--color-primary);
 }
 
 .footer__section ul li {
@@ -25,4 +52,17 @@
 
 .footer_bottom a:hover {
    background-color: var(--color-accent-alt);
+}
+
+
+@media (max-width: 576px) {
+   .footer_top {
+      position: absolute;
+      top: -50px;
+      padding: 1rem 0;
+   }
+
+   .footer_top button {
+      margin-top: 1rem;
+   }
 }

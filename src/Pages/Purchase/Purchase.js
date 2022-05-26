@@ -10,7 +10,7 @@ const Purchase = () => {
    const { productId } = useParams();
    const [user] = useAuthState(auth);
 
-   const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/products/${productId}`).then(res => res.json()));
+   const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://manufacture-web.herokuapp.com/products/${productId}`).then(res => res.json()));
 
    if (isLoading) {
       return <Spinner></Spinner>;

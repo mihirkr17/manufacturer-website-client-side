@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Badge, Dropdown, DropdownButton, InputGroup, Table } from 'react-bootstrap';
 import { useQuery } from 'react-query';
+import AlertModal from '../../../Components/Shared/CustomModal/AlertModal';
 import ConfirmModal from '../../../Components/Shared/CustomModal/ConfirmModal';
 import Spinner from '../../../Components/Shared/Spinner/Spinner';
+import { useMessage } from '../../../Hooks/useMessage';
 import OrderStatusModal from '../Modal/OrderStatusModal';
 
 const ManageOrders = () => {
-   const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch(`http://localhost:5000/all-orders`).then(res => res.json()));
+   const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch(`https://manufacture-web.herokuapp.com/all-orders`).then(res => res.json()));
    const [orderStatusModal, setOrderStatusModal] = useState(false);
    const [takeOrder, setTakeOrder] = useState(false);
+   const [alertShow, setAlertShow] = useState(false);
+   const { msg, setMessage } = useMessage();
 
    if (isLoading) {
       return <Spinner></Spinner>;
@@ -17,8 +21,8 @@ const ManageOrders = () => {
    const takeOrderHandler = async (order) => {
       const { _id, product_id, order_quantity } = order ? order : {};
       const orderInfo = { product_id, order_quantity };
-      
-      const response = await fetch(`http://localhost:5000/order-confirm/${_id}`, {
+
+      const response = await fetch(`https://manufacture-web.herokuapp.com/order-confirm/${_id}`, {
          method: "PUT",
          headers: {
             'content-type': 'application/json'
@@ -27,17 +31,28 @@ const ManageOrders = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      if (data) {
+         refetch();
+         setTakeOrder(false);
+         setAlertShow(true);
+         setMessage("Order Shipped");
+      }
    }
 
    let serial = 0;
    return (
-      <div>
+      <div className='section_default'>
+         <AlertModal alertClose={() => setAlertShow(false)} alertShow={alertShow} message={msg}></AlertModal>
          <div className="container">
+            <h3 className="section_title">
+               Manage All Customer Orders
+            </h3>
+            <p>Total : {allOrders && allOrders.length} Orders.</p>
             <Table striped responsive>
                <thead>
                   <tr>
                      <th>#</th>
+                     <th>Product</th>
                      <th>Name</th>
                      <th>Customer</th>
                      <th>Price</th>
@@ -51,10 +66,15 @@ const ManageOrders = () => {
                <tbody>
                   {
                      allOrders ? allOrders.map((order) => {
-                        const { username, product_name, product_price, order_quantity, total_price, payment, status } = order;
+                        const { username, product_name, product_image, product_price, order_quantity, total_price, payment, status } = order;
                         return (
                            <tr key={order._id}>
                               <td>{++serial}</td>
+                              <td>
+                                 {
+                                    <img src={product_image} style={{ width: "60px", height: "60px" }} alt="product_image" />
+                                 }
+                              </td>
                               <td>{product_name}</td>
                               <td>{username}</td>
                               <td>{product_price}$</td>

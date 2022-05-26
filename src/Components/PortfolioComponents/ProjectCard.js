@@ -31,7 +31,7 @@ const ProjectCard = ({ portfolioData }) => {
             <div className="col-md-8">
                <div className="card-body">
                   <h4 className="card-title text-truncate">{title ? title : ""}</h4>
-                  <article className="card-text mkr_portf_card_article">
+                  <article className="card-text card_article">
                      <div className='portf_tech' style={show ? { height: "auto" } : { height: "50px", overflow: "hidden" }}>
                         <h6>Technologies :</h6>
                         <strong>[{technologies ? technologies.join(" , ") : ""}]</strong>
@@ -42,12 +42,12 @@ const ProjectCard = ({ portfolioData }) => {
                         <ul className='portf_ul' style={show ? { height: "auto" } : { maxHeight: "20px", overflow: "hidden" }}>{features ? features.map((f, index) => <li key={index}>{f}</li>) : ""}</ul>
 
                         <div className="link_container">
-                           <a href={link ? link.github : ""} rel="noreferrer" target={'_blank'}>Repo</a>
+                           <a href={link ? link.github : ""} rel="noopener noreferrer" target={'_blank'}>Repo</a>
                            {
-                              link.github_server && <a rel="noreferrer" href={link.github_server} target={'_blank'}>Server Repo</a>
+                              link.github_server && <a rel="noopener noreferrer" href={link.github_server} target={'_blank'}>Server Repo</a>
                            }
                            {
-                              link.livePage !== "" ? (<a rel="noreferrer" href={link.livePage} target={'_blank'}>Live</a>) : ""
+                              link.livePage !== "" ? (<a rel="noopener noreferrer" href={link.livePage} target={'_blank'}>Live</a>) : ""
                            }
                         </div>
                      </div>

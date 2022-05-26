@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 
 const OrderInfoTable = ({ order }) => {
    const { username, email, product_name, product_price,
-      order_quantity, total_price, payment, TxId, _id, phone, zip, village, district, country, product_id } = order;
+      order_quantity, total_price, payment, TxId, _id, phone, zip, status, village, district, country, product_id } = order;
    return (
       <Table striped bordered hover size="sm">
          <thead>
@@ -32,6 +32,10 @@ const OrderInfoTable = ({ order }) => {
             <tr>
                <th>Payment Status</th>
                <td>{payment}</td>
+            </tr>
+            <tr>
+               <th>Order Status</th>
+               <td>{status}</td>
             </tr>
             <tr>
                <th>Transaction Id</th>

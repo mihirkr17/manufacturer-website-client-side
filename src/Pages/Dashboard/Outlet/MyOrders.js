@@ -3,6 +3,7 @@ import { Badge, Dropdown, DropdownButton, InputGroup, Table } from 'react-bootst
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import AlertModal from '../../../Components/Shared/CustomModal/AlertModal';
 import ConfirmModal from '../../../Components/Shared/CustomModal/ConfirmModal';
 import Spinner from '../../../Components/Shared/Spinner/Spinner';
 import { auth } from '../../../firebase.init';
@@ -14,7 +15,8 @@ const MyOrders = () => {
    const { msg, setMessage } = useMessage();
    const [orderDeleteModal, setOrderDeleteModal] = useState(false);
    const [orderStatusModal, setOrderStatusModal] = useState(false);
-   const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/my-orders/${user?.email}`).then(res => res.json()));
+   const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`https://manufacture-web.herokuapp.com/my-orders/${user?.email}`).then(res => res.json()));
+   const [alertShow, setAlertShow] = useState(false);
 
    if (isLoading) {
       return <Spinner></Spinner>
@@ -25,7 +27,7 @@ const MyOrders = () => {
    const deleteOrderHandler = async (order) => {
       let orderId = order?._id;
 
-      const response = await fetch(`http://localhost:5000/delete-my-order/${orderId}`, {
+      const response = await fetch(`https://manufacture-web.herokuapp.com/delete-my-order/${orderId}`, {
          method: "DELETE"
       });
 
@@ -34,17 +36,25 @@ const MyOrders = () => {
          setMessage(<p><strong className='text-success'>Order Cancelled</strong></p>);
          refetch();
          setOrderDeleteModal(false);
+         setAlertShow(true);
       }
    }
 
    return (
       <div className='section_default'>
+         <AlertModal
+            alertClose={() => setAlertShow(false)}
+            alertShow={alertShow}
+            message={msg}
+         >
+         </AlertModal>
          <div className="container">
             {msg}
             <Table striped responsive>
                <thead>
                   <tr>
                      <th>#</th>
+                     <th>Product</th>
                      <th>Name</th>
                      <th>Price</th>
                      <th>Order Qty</th>
@@ -57,10 +67,15 @@ const MyOrders = () => {
                <tbody>
                   {
                      orders ? orders.map((order) => {
-                        const { product_name, product_price, order_quantity, total_price, payment, status } = order;
+                        const { product_name, product_price, product_image, order_quantity, total_price, payment, status } = order;
                         return (
                            <tr key={order._id}>
                               <td>{++serial}</td>
+                              <td>
+                                 {
+                                    <img src={product_image} style={{ width: "60px", height: "60px" }} alt="product_image" />
+                                 }
+                              </td>
                               <td>{product_name}</td>
                               <td>{product_price}</td>
                               <td>{order_quantity}</td>
@@ -71,14 +86,14 @@ const MyOrders = () => {
                                     payment === 'paid' ?
                                        <Badge>Paid</Badge> :
                                        <>
-                                          <Badge className='bg-warning' as={Link} to={`/dashboard/payment/${order._id}`} style={{ cursor: 'pointer' }}>Payment</Badge>
+                                          <Badge className='text-dark bg-warning' style={{ cursor: "pointer" }} as={Link} to={`/dashboard/payment/${order._id}`}>Payment</Badge>
                                        </>
                                  }
                                  {
                                     payment === 'paid' ?
                                        "" :
                                        <>
-                                          <Badge className='mx-2 bg-danger' onClick={() => setOrderDeleteModal(true && order)} style={{ cursor: 'pointer' }}>Cancel</Badge>
+                                          <Badge className='mx-2 bg-danger btn btn-sm text-light' onClick={() => setOrderDeleteModal(true && order)}>Cancel</Badge>
                                           <ConfirmModal
                                              okConfirm={deleteOrderHandler}
                                              confirmShow={orderDeleteModal}

@@ -6,21 +6,21 @@ import SpinnerBtn from '../Shared/SpinnerBtn';
 const PurchaseForm = ({ product, refetch, user }) => {
 
    const { name, description, price, quantity, image, min_order_quantity, material, availability, _id } = product ? product : {};
-   const [orderQuantity, setOrderQuantity] = useState(min_order_quantity || 0);
+  
+   const [orderQuantity, setOrderQuantity] = useState(min_order_quantity);
    const [disable, setDisable] = useState(false);
    const [msg, setMessage] = useState('');
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
    useEffect(() => {
-      if (orderQuantity < min_order_quantity) {
+      if (parseInt(orderQuantity) < parseInt(min_order_quantity) || orderQuantity === '') {
          setDisable(e => !e);
          setMessage(<p> <strong className='text-danger'>Minimum {min_order_quantity} pieces required for place an order!</strong> </p>);
-      } else if (orderQuantity > quantity) {
+      }
+      if (parseInt(orderQuantity) > parseInt(quantity)) {
          setDisable(e => !e);
          setMessage(<p> <strong className='text-danger'>You can not place this order because selected quantity is greater than available quantity!</strong> </p>);
-      } else {
-         setDisable(false);
       }
 
       return () => {
@@ -55,7 +55,7 @@ const PurchaseForm = ({ product, refetch, user }) => {
          setMessage(<p> <strong className='text-danger'>Please fill out all fields!</strong> </p>);
          setLoading(false);
       } else {
-         const response = await fetch(`http://localhost:5000/orders/${product_id}`, {
+         const response = await fetch(`https://manufacture-web.herokuapp.com/orders/${product_id}`, {
             method: "POST",
             headers: {
                "content-type": "application/json"
@@ -107,7 +107,7 @@ const PurchaseForm = ({ product, refetch, user }) => {
                </div>
                <div className="col-lg-5">
                   <div className="purchase_form p-3 shadow rounded">
-                     {msg}
+                     
                      <Form onSubmit={purchaseHandler} >
                         <h5 className='py-3 text-center'>Purchase Here</h5>
                         <Row className="mb-3">
@@ -118,7 +118,7 @@ const PurchaseForm = ({ product, refetch, user }) => {
 
                            <Form.Group as={Col} controlId="formGridOrderQuantity">
                               <Form.Label>Order Quantity</Form.Label>
-                              <Form.Control type="number" name='orderQuantity' key={min_order_quantity} defaultValue={min_order_quantity} onChange={(e) => setOrderQuantity(e.target.value)} />
+                              <Form.Control type="number" name='orderQuantity' key={min_order_quantity} defaultValue={min_order_quantity} onBlur={(e) => setOrderQuantity(e.target.value)} />
                            </Form.Group>
                         </Row>
 
@@ -161,6 +161,7 @@ const PurchaseForm = ({ product, refetch, user }) => {
                         </Form.Group>
 
                         <Form.Group>
+                        {msg}
                            <Button variant="primary" className='btn-sm' disabled={disable} type="submit">
                               {loading ? <><SpinnerBtn></SpinnerBtn> purchasing...</> : 'Purchase'}
                            </Button>

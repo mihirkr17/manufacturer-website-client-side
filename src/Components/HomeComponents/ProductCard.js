@@ -1,24 +1,28 @@
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Card, ListGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 const ProductCard = ({ product }) => {
+   const { name, quantity, description, min_order_quantity, image, price } = product;
    return (
-      <Card style={{ width: '18rem' }}>
-         <Card.Img variant="top" src={product.image} />
+      <Card className='card_default mb-5' style={{ height: "fit-content" }}>
+         <Card.Img variant="top" style={{ width: "100%", height: "180px" }} src={image} />
          <Card.Body>
-            <Card.Title>{product.name}</Card.Title>
+            <Card.Title>{name}</Card.Title>
             <Card.Text>
-               {product.description}
+               {description.length > 40 ? description.slice(0, 40) + "..." : description}
             </Card.Text>
          </Card.Body>
          <ListGroup className="list-group-flush">
-            <ListGroupItem>Price : {product.price}</ListGroupItem>
-            <ListGroupItem>Available Quantity : {product.quantity}</ListGroupItem>
-            <ListGroupItem>Minimum Order Quantity : {product.min_order_quantity}</ListGroupItem>
+            <small>Price : {price}$</small>
+            <small>Available Quantity : {quantity}&nbsp;pieces</small>
+            <small>Minimum Order Quantity : {min_order_quantity}&nbsp;pieces</small>
          </ListGroup>
          <Card.Body>
-            <Card.Link as={NavLink} to={`/purchase/${product._id}`}>Purchase</Card.Link>
+            <Card.Link className='btn btn-sm btn-info text-dark' as={Link} to={`/purchase/${product._id}`}>Purchase <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></Card.Link>
          </Card.Body>
       </Card>
    );

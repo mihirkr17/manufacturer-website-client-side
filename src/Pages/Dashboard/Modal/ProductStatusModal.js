@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import OrderInfoTable from '../../../Components/DashboardComponents/OrderInfoTable';
+import ProductInfoTable from '../../../Components/DashboardComponents/ProductInfoTable';
 
-const OrderStatusModal = ({ order, closeModal }) => {
-
+const ProductStatusModal = ({ product, closeModal }) => {
    return (
-      <Modal show={order} onHide={closeModal}>
+      <Modal show={product} onHide={closeModal}>
          <Modal.Body>
-            <OrderInfoTable order={order}></OrderInfoTable>
+            <ProductInfoTable product={product}></ProductInfoTable>
          </Modal.Body>
          <Modal.Footer>
             <Button variant="secondary" onClick={closeModal}>
@@ -18,4 +17,4 @@ const OrderStatusModal = ({ order, closeModal }) => {
    );
 };
 
-export default OrderStatusModal;
+export default ProductStatusModal;
