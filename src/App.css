@@ -1,21 +1,36 @@
-:root {
+html {
    /* Font Style */
    --font-primary: "Poppins", sans-serif;
 
    /* Color Combination */
    --color-primary: #e84a5f;
    --color-body: #2a363b;
-   --color-light: #fafafa;
    --color-dark: #080808;
    --color-accent: #99b898;
    --color-accent-alt: #86a385;
+   --color-body: hsl(250, 6%, 15%);
+   --color-primary: hsl(250, 10%, 100%);
+   --color-primary-alt: hsl(250, 20%, 90%);
+   --color-light: hsl(0, 0%, 89%);
+   --color-light-alt: hsl(0, 0%, 69%);
+   --color-dark-alt: #111;
+   --color-hotpink: #ff69b4;
+   --color-trans-one: #2c2c2c7d;
+   --color-chocolate: chocolate;
+   --color-aquamarine: aquamarine;
+   --font-primary: "Quantico", sans-serif;
+   --font-size-normal: 1rem;
+   --font-size-small: 0.9rem;
+   --font-size-smaller: 0.8rem;
+   --font-size-smallest: 0.7rem;
+   --font-size-big: 2rem;
+   --font-size-bigger: 2.8rem;
+   --font-size-biggest: 3rem;
 }
-
 
 body {
    font-family: var(--font-primary);
 }
-
 
 /* Reuseable Class  */
 .section_default {
@@ -29,9 +44,49 @@ body {
 }
 
 .card_default {
-   padding: 2rem 1rem;
-   background: rgba(255, 255, 255, 0.15);
-   border-radius: 16px;
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   border: 1px solid rgba(255, 255, 255, 0.3);
+   padding: 0.9rem;
+   background: var(--color-light);
+   border-radius: 10px;
+   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.445);
+   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.445);
 }
+
+.card_default:hover {
+   -webkit-box-shadow: none;
+   box-shadow: none;
+}
+
+.card_default:hover::after {
+   background-color: var(--color-hotpink);
+}
+
+.section_name {
+   padding: 0.9rem;
+   background-color: var(--color-light);
+   display: inline-block;
+   text-align: center;
+   margin: 5rem 0 0 0;
+   font-size: var(--font-size-normal);
+   font-weight: 600;
+   text-transform: uppercase;
+}
+
+.bt9_tabs {
+   padding: 0.3rem 0.6rem;
+   background-color: var(--color-light);
+   color: var(--color-dark-alt);
+   -webkit-transition: all 0.3s linear;
+   transition: all 0.3s linear;
+   border: none;
+   cursor: pointer;
+   font-size: 0.8rem;
+ }
+ 
+ .bt9_tabs:hover {
+   background-color: var(--color-light-alt);
+ }
+ 
+ .bt9_tabs.active {
+   color: var(--color-dark);
+   background-color: var(--color-light-alt);
+ }
