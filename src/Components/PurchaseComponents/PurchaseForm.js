@@ -118,7 +118,7 @@ const PurchaseForm = ({ product, refetch, user }) => {
 
                            <Form.Group as={Col} controlId="formGridOrderQuantity">
                               <Form.Label>Order Quantity</Form.Label>
-                              <Form.Control type="number" name='orderQuantity' key={min_order_quantity} defaultValue={min_order_quantity} onBlur={(e) => setOrderQuantity(e.target.value)} />
+                              <Form.Control type="number" name='orderQuantity' key={min_order_quantity} defaultValue={min_order_quantity} onChange={(e) => setOrderQuantity(e.target.value)} />
                            </Form.Group>
                         </Row>
 
