@@ -9,7 +9,7 @@ import { Button, FloatingLabel, Form, FormLabel } from 'react-bootstrap';
 import SocialLogin from '../../Components/Auth/SocialLogin';
 import SpinnerBtn from '../../Components/Shared/SpinnerBtn';
 
-
+// login page 
 const Login = () => {
    const { register, formState: { errors }, handleSubmit } = useForm();
    const [
